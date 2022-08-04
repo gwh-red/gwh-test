@@ -4,10 +4,7 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.gwh.entity.User;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -15,7 +12,18 @@ public class ListTest {
 
 
     public static void main(String[] args) {
-        ArrayList<User> users = new ArrayList<>();
+
+        ArrayList<Integer> integers = new ArrayList<>();
+        for (int i = 1; i < 15; i++) {
+            integers.add(i);
+        }
+        integers.add(123);
+        integers.add(1111);
+
+        HashMap<Integer, String> stringHashMap = new HashMap<Integer, String>();
+
+        stringHashMap.put(1,"");
+        /*ArrayList<User> users = new ArrayList<>();
         users.add(new User(1, "aa"));
         users.add(new User(2, "bb"));
         users.add(new User(3, "cc"));
@@ -31,7 +39,7 @@ public class ListTest {
             }
 
         });
-        System.out.println(a);
+        System.out.println(a);*/
         /*  List<User> collect = users.stream().filter(user -> {
             if (user.getName().equals("bb")) {
                 return false;
@@ -66,9 +74,7 @@ public class ListTest {
 
         List<User> users2 = new ArrayList<>();
 
-        ok:
         for (int i = 0; i < users2.size(); i++) {
-            break ok;
         }
 
         Map<Integer, String> maps = users1.stream().collect(Collectors.toMap(User::getId, User::getName));
