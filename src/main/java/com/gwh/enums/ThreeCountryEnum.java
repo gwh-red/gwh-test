@@ -7,7 +7,12 @@ import lombok.Getter;
  */
 
 public enum ThreeCountryEnum {
-    ONE(1, "齐"), TWO(2, "楚"), THREE(3, "燕"), FOUR(4, "赵"), FIVE(5, "小日子"), SIX(6, "韩");
+    ONE(1, "齐"),
+    TWO(2, "楚"),
+    THREE(3, "燕"),
+    FOUR(4, "赵"),
+    FIVE(5, "小日子"),
+    SIX(6, "韩");
 
     @Getter
     private Integer index;
