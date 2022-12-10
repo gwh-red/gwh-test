@@ -24,8 +24,13 @@ public class IsPhone {
       /*  String format = String.format("%s_%s.zip", 1, 2);
         System.out.println(format);*/
 
-        boolean phone = IsPhone.isPhone("19172587706");
-        System.out.println(phone);
+       /* boolean phone = IsPhone.isPhone("19172587706");
+        System.out.println(phone);*/
+
+
+        String ch= "52";
+        String agents = "1,52,53";
+        System.out.println(agents.contains(ch));
 
     }
 

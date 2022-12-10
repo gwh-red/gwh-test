@@ -1,8 +1,7 @@
 package com.gwh;
 
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
@@ -14,6 +13,18 @@ public class BlockingQueueDome {
 
     public static void main(String[] args) throws InterruptedException {
         //BlockingQueue<String>
+
+        //获取当前时间
+        LocalDateTime nowTime= LocalDateTime.now();
+        //自定义时间
+        LocalDateTime endTime = LocalDateTime.of(2021, 10, 23, 14, 10, 10);
+        //比较  如今的时间 在 设定的时间 之后  返回的类型是Boolean类型
+        System.out.println(nowTime.isAfter(endTime));
+        //比较   如今的时间 在 设定的时间 之前  返回的类型是Boolean类型
+        System.out.println(nowTime.isBefore(endTime));
+        //比较   如今的时间 和 设定的时候  相等  返回类型是Boolean类型
+        System.out.println(nowTime.equals(endTime));
+
 
         BlockingQueue<String> strings = new SynchronousQueue<>();
         strings.put("1");

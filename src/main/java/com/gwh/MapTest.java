@@ -1,9 +1,6 @@
 package com.gwh;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MapTest {
     public static void main(String[] args) {
@@ -13,7 +10,6 @@ public class MapTest {
             stringObjectHashMap.put("userId", 1);
         }
         System.out.println(stringObjectHashMap);
-
 
 
     }
