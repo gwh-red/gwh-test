@@ -22,10 +22,10 @@ public class AQSTest {
 
         Map<String, Object> params = new HashMap<>();
 
-        params.put("page","1");
-        params.put("ddd","dd");
-        params.put("aaa","aaa");
-        params.put("ccc","ccc");
+        params.put("page", "1");
+        params.put("ddd", "dd");
+        params.put("aaa", "aaa");
+        params.put("ccc", "ccc");
 
 
         StringBuilder valueSb1 = new StringBuilder();
@@ -35,7 +35,7 @@ public class AQSTest {
         Set<Map.Entry<String, Object>> entrys = sortParams.entrySet();
         // 遍历排序的字典,并拼接value1+value2......格式
         for (Map.Entry<String, Object> entry : entrys) {
-            System.out.println(entry.getKey()+"="+entry.getValue()+"&");
+            System.out.println(entry.getKey() + "=" + entry.getValue() + "&");
             //valueSb1.append(entry.getKey()+"="+entry.getValue()+"&");
         }
 
