@@ -1,11 +1,8 @@
 package com.gwh;
 
-import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.gwh.entity.User;
-import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class ListTest {
@@ -13,16 +10,27 @@ public class ListTest {
 
     public static void main(String[] args) {
 
-        ArrayList<Integer> integers = new ArrayList<>();
+
+
+
+      /*  ArrayList<Integer> integers = new ArrayList<>();
         for (int i = 1; i < 15; i++) {
             integers.add(i);
         }
         integers.add(123);
         integers.add(1111);
 
-        HashMap<Integer, String> stringHashMap = new HashMap<Integer, String>();
+        List<Integer> collect = integers.stream().filter(integer -> {
+            if (integer < 10) {
+                return false;
+            }
+            return true;
+        }).collect(Collectors.toList());
+        System.out.println(collect);*/
 
-        stringHashMap.put(1,"");
+        //HashMap<Integer, String> stringHashMap = new HashMap<Integer, String>();
+
+        //stringHashMap.put(1,"");
         /*ArrayList<User> users = new ArrayList<>();
         users.add(new User(1, "aa"));
         users.add(new User(2, "bb"));

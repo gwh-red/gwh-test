@@ -1,0 +1,88 @@
+@startuml
+动物 ..> 空气 : 依赖
+动物 ..> 水
+鸟 --|> 动物 : 继承
+大雁 ..|> 飞翔 : 实现接口
+大雁 --|> 鸟
+大雁 "n" --o "1" 雁群 : 聚合
+鸭 --|> 鸟
+唐老鸭 -- 鸭
+翅膀 --* 鸟 : 组合 >
+企鹅 --> 气候 : 单向关联
+企鹅 --|> 鸟
+
+class 动物 {
+    - {static}有生命
+    # 重量
+    + 年龄
+    + {abstract}新陈代谢(空气 水)
+    + 繁殖()
+    + 繁殖(变量1)
+}
+
+note right: 动物的注释
+
+note left of 动物::重量
+    动物的重量的注释
+end note
+
+note left of 动物::"繁殖()"
+    同名方法的注释
+end note
+
+note right of 动物::"繁殖(变量1)"
+    同名方法的注释
+end note
+
+class 空气
+
+class 水
+
+class 鸟 {
+    + 翅膀
+    + 下蛋()
+}
+
+class 翅膀 {
+
+}
+
+interface 飞翔 {
+    + 飞()
+}
+
+class 大雁 {
+    + 下蛋()
+    + 飞翔()
+}
+
+note top of 大雁
+    大雁的注释
+end note
+
+class 雁群 {
+    + V型飞行()
+    + 一型飞行()
+}
+
+class 鸭 {
+    + 下蛋()
+}
+
+class 唐老鸭 {
+    - 讲话()
+    # 走路()
+}
+
+class 企鹅 {
+    + 下蛋()
+}
+
+enum 气候 {
+}
+
+note as N1
+    这是一个注释，可以像Markdown一样贴图和
+    HTML一样<u>下划线</u>
+end note
+@enduml

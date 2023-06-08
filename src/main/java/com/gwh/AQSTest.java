@@ -1,10 +1,14 @@
 package com.gwh;
 
 
+import cn.hutool.core.util.NumberUtil;
+
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 public class AQSTest {
 
@@ -19,8 +23,19 @@ public class AQSTest {
         }finally {
             lock.unlock();
         }*/
+        BigDecimal mul = NumberUtil.mul(new BigDecimal("5"), new BigDecimal("5"));
+        System.out.println(mul);
+        long l = System.currentTimeMillis();
+        try {
 
-        Map<String, Object> params = new HashMap<>();
+
+            System.out.println(l);
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(System.currentTimeMillis() - l);
+       /* Map<String, Object> params = new HashMap<>();
 
         params.put("page", "1");
         params.put("ddd", "dd");
@@ -37,7 +52,7 @@ public class AQSTest {
         for (Map.Entry<String, Object> entry : entrys) {
             System.out.println(entry.getKey() + "=" + entry.getValue() + "&");
             //valueSb1.append(entry.getKey()+"="+entry.getValue()+"&");
-        }
+        }*/
 
     }
 
