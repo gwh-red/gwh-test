@@ -1,23 +1,24 @@
 package com.gwh;
 
 
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.date.DateTime;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.date.*;
+import com.alibaba.fastjson.JSON;
+import org.apache.http.impl.cookie.DateUtils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.temporal.TemporalAdjusters;
+import java.util.*;
 
 public class DateTest {
+    public static final String YYYMMDD_JFP_STR = "yyyyMMdd";
+
+    private static final DateTimeFormatter YYYMMDD_JFP_FMT = DateTimeFormatter.ofPattern(YYYMMDD_JFP_STR);
 
     public static Date addHour(int hour) {
         return localDateTime2Date(LocalDateTime.now().plusHours((long) hour));
@@ -53,79 +54,93 @@ public class DateTest {
         return date.after(begin) && date.before(end);
     }
 
-    public static void main(String[] args) {
-        LocalDate localDate111 = null;
-        localDate111 = LocalDateTimeUtil.parseDate("2020-01-23 12:23:56", DateTimeFormatter.ISO_DATE_TIME);
-        System.out.println(localDate111);
 
-        //LocalDateTime parse = LocalDateTimeUtil.parse("2020-01-23T12:23");
-        //System.out.println(parse);
+    public static void main(String[] args) throws ParseException {
 
-
-        String format1 = LocalDateTimeUtil.format(LocalDateTime.now(), DatePattern.NORM_DATETIME_MINUTE_PATTERN);
-        System.out.println(format1);
-      /*  System.out.println(localDateTime2Date(LocalDateTime.now()));
+        Double distance = Double.valueOf("0.22175919834248473") * 1000d * 1.4d;
+        System.out.println(distance);
+        System.out.println(String.format("%.4f", distance));
 
 
-        String strStartTime1 = "00:00:00";
-        String strEndTime1 = "20:00:00";
+        //获取秒数
+        Long second = LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
+//获取毫秒数
+        Long milliSecond = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        String now = sdf.format(new Date());
-        Date nowTime;
-        try {
-            nowTime = sdf.parse(now);
-            Date startTime1 = sdf.parse(strStartTime1);
-            Date endTime1 = sdf.parse(strEndTime1);
-            // 注：也可以通过此方式判断当前时间是否具体时间段内 yyyy-MM-dd HH:mm:ss格式 [2022-03-09 12:00:00,2022-03-10 15:00:00]
-            //   当前时间和时间段的格式保持一致即可判断
-            if (isEffectiveDate(nowTime, startTime1, endTime1)) {
-                System.out.println("当前时间在时间段内[" + strStartTime1 + "," + strEndTime1 + "]");
-            } else {
-                System.out.println("当前时间不再时间段内[" + strStartTime1 + "," + strEndTime1 + "]");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        long l = System.currentTimeMillis();
+        System.out.println(second + "----" + milliSecond + "--------" + l);
+
+
+        Calendar ca = Calendar.getInstance();
+        System.out.println(DateUtil.lastWeek());
+        ca.setTime(DateUtil.lastWeek());
+        int i1 = ca.get(Calendar.WEEK_OF_YEAR) == 1 ? 52 : ca.get(Calendar.WEEK_OF_YEAR) - 1;
+        System.out.println(i1);
+     /*   Calendar ca = Calendar.getInstance();
+
+        ca.setTime(DateUtil.lastWeek());
+        int i1 = ca.get(Calendar.WEEK_OF_YEAR) == 1 ? 52 : ca.get(Calendar.WEEK_OF_YEAR) - 1;
+        System.out.println(i1);*/
+//time:2364403  currentTime:1690361961457   Long.valueOf(lastTime):1690359597054
+        //  1690362491548  Long.valueOf(lastTime):1690362491359
+        Long long1 = Long.valueOf("1690362690114");
+        Long long2 = Long.valueOf("1690362677900");
+        //   Long.valueOf(lastTime):1690362677900
+//currentTime:1690362601182   Long.valueOf(lastTime):1690362029915
+        Date date = new Date(long1);
+        Date date1 = new Date(long2);
+        System.out.println(DateUtil.format(date, "yyyy-MM-dd HH:mm:ss"));
+        System.out.println(DateUtil.format(date1, "yyyy-MM-dd HH:mm:ss"));
+      /*  Date theFirstDayOfLastMonth = DateTest.getTheFirstDayOfLastMonth(-1);
+        Date lastDayOfLastMonth = DateTest.getLastDayOfLastMonth(0);
+
+        Date beginOfDay = DateUtil.beginOfDay(theFirstDayOfLastMonth);
+        Date endOfDay = DateUtil.endOfDay(lastDayOfLastMonth);
+
+        int year = DateUtil.year(beginOfDay);
+        int month = DateUtil.month(new Date());
+
+        System.out.println(theFirstDayOfLastMonth);
+        System.out.println(lastDayOfLastMonth);
+        System.out.println(beginOfDay);
+        System.out.println(endOfDay);
+        System.out.println(year);
+        System.out.println(month);
 */
 
-
-        LocalDateTime offset = LocalDateTimeUtil.offset(LocalDateTime.now(), 10, ChronoUnit.SECONDS);
-        System.out.println(offset);
-
-
-        System.out.println(DateTest.getBeginDayOfYesterday());
-
-        System.out.println(DateUtil.parse("20220413", "yyyyMMdd"));
-
-        Date date1 = new Date();
-
-        DateTime newDate2 = DateUtil.offsetDay(date1, -60);
-        System.out.println(DateUtil.format(DateUtil.offsetDay(date1, -60), "yyyyMMdd"));
-
-        String format = DateUtil.format(new Date(), "yyyyMMdd");
-        System.out.println(format);
-        System.out.println(DateUtil.format(DateUtil.yesterday(), "yyyyMMdd"));
-        DateTime date = DateUtil.parse(DateUtil.yesterday().toString());
-
-        //一天的开始，结果：2017-03-01 00:00:00
-        Date beginOfDay = DateUtil.beginOfDay(date);
-
-        //一天的结束，结果：2017-03-01 23:59:59
-        Date endOfDay = DateUtil.endOfDay(date);
-
-        System.out.println(date + "           " + beginOfDay + "              " + endOfDay + "             ");
+       /* LocalDate now = LocalDate.now();
+        // 求这个日期上一周的周一、周日
+        LocalDate todayOfLastWeek = now.minusDays(7);
+        LocalDate monday = todayOfLastWeek.with(TemporalAdjusters.previous(DayOfWeek.SUNDAY)).plusDays(1);
+        LocalDate sunday = todayOfLastWeek.with(TemporalAdjusters.next(DayOfWeek.MONDAY)).minusDays(1);
 
 
-        LocalDateTime time = LocalDateTime.now();
+        LocalDateTime startTime = LocalDateTimeUtil.beginOfDay(monday.atStartOfDay());
+        LocalDateTime endTime = LocalDateTimeUtil.endOfDay(sunday.atStartOfDay());
 
-        System.out.println(time);
+        int year = DateUtil.year(DateUtil.lastWeek());
+        System.out.println(DateUtil.format(DateUtil.yesterday(), "MM-dd"));
+        System.out.println(startTime);
+        System.out.println(endTime);*/
 
-        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        // 求这个日期上一周的周一、周日
+   /*     LocalDate now = LocalDate.now();
+        LocalDate todayOfLastWeek = now.minusDays(7);
+        LocalDate monday = todayOfLastWeek.with(TemporalAdjusters.previous(DayOfWeek.SUNDAY)).plusDays(1);
+        System.out.println(monday);*/
+   /*     Date theFirstDayOfLastMonth = getTheFirstDayOfLastMonth(-6);
+        Date lastDayOfLastMonth = getLastDayOfLastMonth(-5);
 
-        String strDate2 = dtf2.format(time);
-        System.out.println(strDate2);
 
+        Date beginOfDay = DateUtil.beginOfDay(theFirstDayOfLastMonth);
+
+        Date endOfDay = DateUtil.endOfDay(lastDayOfLastMonth);
+
+        System.out.println(DateUtil.year(beginOfDay));
+        System.out.println(DateUtil.month(beginOfDay));
+
+        System.out.println(beginOfDay);
+        System.out.println(endOfDay);*/
     }
 
     /**
